@@ -25,7 +25,7 @@ orion-autodev/
 ### 1. Clone and Install
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/orion-autodev.git
+git clone https://github.com/Rftmxqgx1/orion-autodev.git
 cd orion-autodev/server
 npm install
 ```

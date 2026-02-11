@@ -1,0 +1,21 @@
+# Manual Commands to Push to GitHub
+
+After creating your repository on GitHub, run these commands:
+
+1. Navigate to the directory:
+   cd C:\Users\Private\Documents\orion-autodev
+
+2. Add remote (replace YOUR_USERNAME):
+   git remote add origin https://github.com/YOUR_USERNAME/orion-autodev.git
+
+3. Rename branch to main:
+   git branch -M main
+
+4. Push to GitHub:
+   git push -u origin main
+
+---
+
+Alternative: If you prefer SSH:
+   git remote add origin git@github.com:YOUR_USERNAME/orion-autodev.git
+   git push -u origin main
