@@ -1,4 +1,4 @@
-# 🤖 Orion AutoDev
+# 🤖 Orion Dev Bot
 
 Autonomous coding agent that receives tasks via WhatsApp, creates branches, runs AI agents, and opens PRs automatically.
 
@@ -25,7 +25,7 @@ orion-autodev/
 ### 1. Clone and Install
 
 ```bash
-git clone https://github.com/Rftmxqgx1/orion-autodev.git
+git clone https://github.com/Rftmxqgx1/orion-dev-bot.git
 cd orion-autodev/server
 npm install
 ```
@@ -40,7 +40,7 @@ TWILIO_SID=your_twilio_sid
 TWILIO_AUTH=your_twilio_auth_token
 TWILIO_NUMBER=your_twilio_whatsapp_number
 REPO_OWNER=your_github_username
-REPO_NAME=orion-autodev
+REPO_NAME=orion-dev-bot
 ```
 
 ### 3. Deploy Server

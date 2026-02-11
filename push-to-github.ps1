@@ -3,11 +3,11 @@
 
 # Replace YOUR_GITHUB_USERNAME with your actual GitHub username
 $GITHUB_USERNAME = "YOUR_GITHUB_USERNAME"
-$REPO_URL = "https://github.com/$GITHUB_USERNAME/orion-autodev.git"
+$REPO_URL = "https://github.com/$GITHUB_USERNAME/orion-dev-bot.git"
 
 Write-Host "🚀 Pushing to GitHub..." -ForegroundColor Cyan
 
-cd C:\Users\Private\Documents\orion-autodev
+cd C:\Users\Private\Documents\orion-dev-bot
 
 # Set remote
 git remote add origin $REPO_URL
@@ -19,4 +19,4 @@ git branch -M main
 git push -u origin main
 
 Write-Host "✅ Repository successfully pushed to GitHub!" -ForegroundColor Green
-Write-Host "📍 View at: https://github.com/$GITHUB_USERNAME/orion-autodev" -ForegroundColor Yellow
+Write-Host "📍 View at: https://github.com/$GITHUB_USERNAME/orion-dev-bot" -ForegroundColor Yellow

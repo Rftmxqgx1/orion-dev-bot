@@ -1,11 +1,11 @@
 # ✅ ORION AUTODEV - CREATION COMPLETE!
 
 ```
-   ___       _               ___        _        ___
-  / _ \ _ __(_) ___  _ __   / _ \ _   _| |_ ___ |   \  _____   __
- | | | | '__| |/ _ \| '_ \ | | | | | | | __/ _ \| |) |/ _ \ \ / /
- | |_| | |  | | (_) | | | || |_| | |_| | || (_) |   <|  __/\ V /
-  \___/|_|  |_|\___/|_| |_| \___/ \__,_|\__\___/|_|\_\\___| \_/
+   ___       _               ___             ___       _
+  / _ \ _ __(_) ___  _ __   |   \ _____ __  | _ ) ___ | |_ 
+ | | | | '__| |/ _ \| '_ \  | |) / -_) V /  | _ \/ _ \|  _|
+ | |_| | |  | | (_) | | | | |___/\___|\_/   |___/\___/ \__|
+  \___/|_|  |_|\___/|_| |_|
 
 ```
 
@@ -13,13 +13,15 @@
 
 Your autonomous coding agent repository has been created and pushed to GitHub!
 
+Repository: orion-dev-bot
+
 ---
 
 ## 📊 What We Built
 
 ### Repository Structure
 ```
-orion-autodev/
+orion-dev-bot/
 ├── server/                 ✅ Express webhook receiver
 │   ├── src/
 │   │   ├── index.js       ✅ Main webhook handler
@@ -50,16 +52,16 @@ orion-autodev/
 ## 🔗 Links
 
 **GitHub Repository:**
-https://github.com/Rftmxqgx1/orion-autodev
+https://github.com/Rftmxqgx1/orion-dev-bot
 
 **GitHub Actions:**
-https://github.com/Rftmxqgx1/orion-autodev/actions
+https://github.com/Rftmxqgx1/orion-dev-bot/actions
 
 **Add Secrets:**
-https://github.com/Rftmxqgx1/orion-autodev/settings/secrets/actions
+https://github.com/Rftmxqgx1/orion-dev-bot/settings/secrets/actions
 
 **Local Path:**
-C:\Users\Private\Documents\orion-autodev
+C:\Users\Private\Documents\orion-dev-bot
 
 ---
 
@@ -72,13 +74,13 @@ C:\Users\Private\Documents\orion-autodev
 - Copy token
 
 ### 2. Add 6 GitHub Secrets (5 min)
-→ https://github.com/Rftmxqgx1/orion-autodev/settings/secrets/actions
+→ https://github.com/Rftmxqgx1/orion-dev-bot/settings/secrets/actions
 
 | Secret | Value |
 |--------|-------|
 | GITHUB_TOKEN | [your token] |
 | REPO_OWNER | Rftmxqgx1 |
-| REPO_NAME | orion-autodev |
+| REPO_NAME | orion-dev-bot |
 | TWILIO_SID | [from Twilio] |
 | TWILIO_AUTH | [from Twilio] |
 | TWILIO_NUMBER | [from Twilio] |

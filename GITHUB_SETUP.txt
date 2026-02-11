@@ -3,10 +3,10 @@
 After creating your repository on GitHub, run these commands:
 
 1. Navigate to the directory:
-   cd C:\Users\Private\Documents\orion-autodev
+   cd C:\Users\Private\Documents\orion-dev-bot
 
 2. Add remote (replace YOUR_USERNAME):
-   git remote add origin https://github.com/YOUR_USERNAME/orion-autodev.git
+   git remote add origin https://github.com/YOUR_USERNAME/orion-dev-bot.git
 
 3. Rename branch to main:
    git branch -M main
@@ -17,5 +17,5 @@ After creating your repository on GitHub, run these commands:
 ---
 
 Alternative: If you prefer SSH:
-   git remote add origin git@github.com:YOUR_USERNAME/orion-autodev.git
+   git remote add origin git@github.com:YOUR_USERNAME/orion-dev-bot.git
    git push -u origin main

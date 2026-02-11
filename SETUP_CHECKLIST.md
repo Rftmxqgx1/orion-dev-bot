@@ -5,13 +5,13 @@
 - [x] All files created
 - [x] Git initialized
 - [x] Initial commit made
-- [x] Location: C:\Users\Private\Documents\orion-autodev
+- [x] Location: C:\Users\Private\Documents\orion-dev-bot
 
 ## 📤 Step 2: Push to GitHub (TODO)
 
 1. **Create GitHub Repository**
    - Go to: https://github.com/new
-   - Name: `orion-autodev`
+   - Name: `orion-dev-bot`
    - Description: "WhatsApp-driven autonomous coding agent"
    - DO NOT initialize with README
    - Click "Create repository"
@@ -30,7 +30,7 @@ Add these secrets:
 - [ ] `TWILIO_AUTH` - From Twilio Console  
 - [ ] `TWILIO_NUMBER` - Your Twilio WhatsApp number
 - [ ] `REPO_OWNER` - Your GitHub username
-- [ ] `REPO_NAME` - orion-autodev
+- [ ] `REPO_NAME` - orion-dev-bot
 
 ## 📱 Step 4: Set Up Twilio WhatsApp
 
@@ -81,7 +81,7 @@ TWILIO_SID=your_sid
 TWILIO_AUTH=your_auth
 TWILIO_NUMBER=whatsapp:+14155238886
 REPO_OWNER=your_username
-REPO_NAME=orion-autodev
+REPO_NAME=orion-dev-bot
 PORT=4000
 ```
 

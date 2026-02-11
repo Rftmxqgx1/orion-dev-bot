@@ -4,7 +4,7 @@
 
 ### Step 1: Install Dependencies
 ```powershell
-cd C:\Users\Private\Documents\orion-autodev\server
+cd C:\Users\Private\Documents\orion-dev-bot\server
 npm install
 ```
 
@@ -16,13 +16,13 @@ TWILIO_SID=your_twilio_sid
 TWILIO_AUTH=your_twilio_auth
 TWILIO_NUMBER=whatsapp:+14155238886
 REPO_OWNER=Rftmxqgx1
-REPO_NAME=orion-autodev
+REPO_NAME=orion-dev-bot
 PORT=4000
 ```
 
 ### Step 3: Start Server
 ```powershell
-cd C:\Users\Private\Documents\orion-autodev\server
+cd C:\Users\Private\Documents\orion-dev-bot\server
 npm start
 ```
 
@@ -59,7 +59,7 @@ curl -X POST http://localhost:4000/webhook/whatsapp \
 - Server logs: "🛠️ Job started on branch: job/1234567890"
 
 ### Step 5: Check GitHub
-Go to: https://github.com/Rftmxqgx1/orion-autodev/branches
+Go to: https://github.com/Rftmxqgx1/orion-dev-bot/branches
 
 You should see a new branch created!
 
@@ -114,19 +114,19 @@ node test-webhook.js
 
 **Start server:**
 ```powershell
-cd C:\Users\Private\Documents\orion-autodev\server
+cd C:\Users\Private\Documents\orion-dev-bot\server
 npm start
 ```
 
 **Install dependencies:**
 ```powershell
-cd C:\Users\Private\Documents\orion-autodev\server
+cd C:\Users\Private\Documents\orion-dev-bot\server
 npm install
 ```
 
 **Run in development mode (auto-restart):**
 ```powershell
-cd C:\Users\Private\Documents\orion-autodev\server
+cd C:\Users\Private\Documents\orion-dev-bot\server
 npm run dev
 ```
 (Note: You need to install nodemon first: `npm install --save-dev nodemon`)

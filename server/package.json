@@ -1,7 +1,7 @@
 {
-  "name": "orion-autodev-server",
+  "name": "orion-dev-bot-server",
   "version": "1.0.0",
-  "description": "Event Handler for Orion AutoDev - Webhook Receiver",
+  "description": "Event Handler for Orion Dev Bot - Webhook Receiver",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",

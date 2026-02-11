@@ -1,14 +1,14 @@
-# 🚀 Orion AutoDev - Quick Reference
+# 🚀 Orion Dev Bot - Quick Reference
 
 ## 📍 Repository
-https://github.com/Rftmxqgx1/orion-autodev
+https://github.com/Rftmxqgx1/orion-dev-bot
 
 ## 🔑 Required Secrets (Add to GitHub)
-https://github.com/Rftmxqgx1/orion-autodev/settings/secrets/actions
+https://github.com/Rftmxqgx1/orion-dev-bot/settings/secrets/actions
 
 1. GITHUB_TOKEN - Personal access token
 2. REPO_OWNER - Rftmxqgx1
-3. REPO_NAME - orion-autodev
+3. REPO_NAME - orion-dev-bot
 4. TWILIO_SID - From Twilio console
 5. TWILIO_AUTH - From Twilio console
 6. TWILIO_NUMBER - whatsapp:+14155238886
@@ -32,8 +32,8 @@ Send WhatsApp message:
 "Create a health check endpoint"
 
 ## 📊 Check Status
-Actions: https://github.com/Rftmxqgx1/orion-autodev/actions
-PRs: https://github.com/Rftmxqgx1/orion-autodev/pulls
+Actions: https://github.com/Rftmxqgx1/orion-dev-bot/actions
+PRs: https://github.com/Rftmxqgx1/orion-dev-bot/pulls
 
 ## 📂 Local Path
 C:\Users\Private\Documents\orion-autodev

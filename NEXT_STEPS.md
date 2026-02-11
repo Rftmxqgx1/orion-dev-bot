@@ -5,7 +5,7 @@
 - [x] Repository structure created locally
 - [x] All files and code generated
 - [x] Git initialized with initial commit
-- [x] Pushed to GitHub: https://github.com/Rftmxqgx1/orion-autodev
+- [x] Pushed to GitHub: https://github.com/Rftmxqgx1/orion-dev-bot
 - [x] Configuration updated with your GitHub username
 
 ---
@@ -79,7 +79,7 @@ Choose ONE deployment platform:
    TWILIO_AUTH=your_auth_token
    TWILIO_NUMBER=whatsapp:+14155238886
    REPO_OWNER=Rftmxqgx1
-   REPO_NAME=orion-autodev
+   REPO_NAME=orion-dev-bot
    PORT=4000
    ```
 7. Deploy! You'll get a URL like: `https://orion-autodev.up.railway.app`
