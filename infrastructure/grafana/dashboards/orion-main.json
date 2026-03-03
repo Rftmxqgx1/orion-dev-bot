@@ -1,0 +1,84 @@
+{
+  "title": "ORION Intelligence Dashboard",
+  "uid": "orion-main",
+  "tags": ["orion"],
+  "timezone": "browser",
+  "schemaVersion": 38,
+  "refresh": "30s",
+  "panels": [
+    {
+      "id": 1, "type": "stat", "title": "Current Regime",
+      "gridPos": {"x": 0, "y": 0, "w": 4, "h": 4},
+      "targets": [{"expr": "orion_current_regime", "datasource": "Prometheus"}],
+      "options": {"colorMode": "background"},
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            {"type": "value", "options": {"1": {"text": "BULL", "color": "green"}}},
+            {"type": "value", "options": {"2": {"text": "BEAR", "color": "red"}}},
+            {"type": "value", "options": {"3": {"text": "CRISIS", "color": "dark-red"}}},
+            {"type": "value", "options": {"4": {"text": "SIDEWAYS", "color": "yellow"}}},
+            {"type": "value", "options": {"5": {"text": "FRAGILE", "color": "orange"}}}
+          ]
+        }
+      }
+    },
+    {
+      "id": 2, "type": "gauge", "title": "Regime Confidence",
+      "gridPos": {"x": 4, "y": 0, "w": 4, "h": 4},
+      "targets": [{"expr": "orion_regime_confidence * 100", "datasource": "Prometheus"}],
+      "fieldConfig": {"defaults": {"min": 0, "max": 100, "unit": "percent", "thresholds": {"steps": [{"value": 0, "color": "red"}, {"value": 50, "color": "yellow"}, {"value": 75, "color": "green"}]}}}
+    },
+    {
+      "id": 3, "type": "stat", "title": "Anomalies Detected",
+      "gridPos": {"x": 8, "y": 0, "w": 4, "h": 4},
+      "targets": [{"expr": "increase(orion_anomalies_detected_total[1h])", "datasource": "Prometheus"}],
+      "fieldConfig": {"defaults": {"thresholds": {"steps": [{"value": 0, "color": "green"}, {"value": 1, "color": "yellow"}, {"value": 3, "color": "red"}]}}}
+    },
+    {
+      "id": 4, "type": "stat", "title": "Articles Scraped (1h)",
+      "gridPos": {"x": 12, "y": 0, "w": 4, "h": 4},
+      "targets": [{"expr": "increase(orion_articles_scraped_total[1h])", "datasource": "Prometheus"}],
+      "fieldConfig": {"defaults": {"color": {"mode": "fixed", "fixedColor": "blue"}}}
+    },
+    {
+      "id": 5, "type": "stat", "title": "Translations (1h)",
+      "gridPos": {"x": 16, "y": 0, "w": 4, "h": 4},
+      "targets": [{"expr": "increase(orion_translations_total[1h])", "datasource": "Prometheus"}],
+      "fieldConfig": {"defaults": {"color": {"mode": "fixed", "fixedColor": "purple"}}}
+    },
+    {
+      "id": 6, "type": "timeseries", "title": "News Volume Over Time",
+      "gridPos": {"x": 0, "y": 4, "w": 12, "h": 8},
+      "targets": [
+        {"expr": "rate(orion_articles_scraped_total[5m]) * 300", "legendFormat": "articles/5min", "datasource": "Prometheus"},
+        {"expr": "orion_redis_queue_size", "legendFormat": "queue depth", "datasource": "Prometheus"}
+      ]
+    },
+    {
+      "id": 7, "type": "timeseries", "title": "Regime + Anomaly Timeline",
+      "gridPos": {"x": 12, "y": 4, "w": 12, "h": 8},
+      "targets": [
+        {"expr": "orion_current_regime", "legendFormat": "regime (1=BULL 2=BEAR 3=CRISIS 4=SIDEWAYS 5=FRAGILE)", "datasource": "Prometheus"},
+        {"expr": "orion_volume_zscore", "legendFormat": "volume z-score", "datasource": "Prometheus"}
+      ]
+    },
+    {
+      "id": 8, "type": "timeseries", "title": "Region Risk Scores",
+      "gridPos": {"x": 0, "y": 12, "w": 12, "h": 8},
+      "targets": [
+        {"expr": "orion_region_risk_score", "legendFormat": "{{region}}", "datasource": "Prometheus"}
+      ]
+    },
+    {
+      "id": 9, "type": "timeseries", "title": "Pipeline Health",
+      "gridPos": {"x": 12, "y": 12, "w": 12, "h": 8},
+      "targets": [
+        {"expr": "orion_processed_queue_size", "legendFormat": "processed queue", "datasource": "Prometheus"},
+        {"expr": "orion_news_volume_per_cycle", "legendFormat": "news vol/cycle", "datasource": "Prometheus"},
+        {"expr": "increase(orion_scrape_errors_total[5m])", "legendFormat": "scrape errors", "datasource": "Prometheus"},
+        {"expr": "increase(orion_translation_errors_total[5m])", "legendFormat": "translation errors", "datasource": "Prometheus"}
+      ]
+    }
+  ]
+}
