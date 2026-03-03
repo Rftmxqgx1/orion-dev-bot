@@ -1,0 +1,190 @@
+version: "3.9"
+
+networks:
+  orion-net:
+    driver: bridge
+
+volumes:
+  redis_data:
+  prometheus_data:
+  grafana_data:
+  postgres_data:
+
+services:
+
+  # ── TIER 1 — ALWAYS ON (~800MB) ──────────────────────────
+  # docker compose up -d
+
+  redis:
+    image: redis:7-alpine
+    container_name: orion-redis
+    restart: unless-stopped
+    command: redis-server --maxmemory 200mb --maxmemory-policy allkeys-lru --save ""
+    networks: [orion-net]
+    ports: ["6379:6379"]
+    deploy:
+      resources:
+        limits:
+          memory: 220M
+
+  news-scraper:
+    image: node:18-alpine
+    container_name: orion-news-scraper
+    restart: unless-stopped
+    working_dir: /app
+    volumes: ["./services/news-scraper:/app"]
+    command: sh -c "npm install --silent && node src/index.js"
+    environment:
+      - REDIS_URL=redis://orion-redis:6379
+      - SCRAPE_INTERVAL_MS=300000
+      - NODE_ENV=production
+      - NODE_OPTIONS=--max-old-space-size=150
+    depends_on: [redis]
+    networks: [orion-net]
+    ports: ["3030:3030"]
+    deploy:
+      resources:
+        limits:
+          memory: 180M
+
+  translator:
+    image: node:18-alpine
+    container_name: orion-translator
+    restart: unless-stopped
+    working_dir: /app
+    volumes: ["./services/translator:/app"]
+    command: sh -c "npm install --silent && node src/index.js"
+    environment:
+      - REDIS_URL=redis://orion-redis:6379
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - TRANSLATE_BATCH_SIZE=10
+      - NODE_OPTIONS=--max-old-space-size=100
+    depends_on: [redis, news-scraper]
+    networks: [orion-net]
+    ports: ["3031:3031"]
+    deploy:
+      resources:
+        limits:
+          memory: 120M
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: orion-prometheus
+    restart: unless-stopped
+    volumes:
+      - ./infrastructure/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.retention.time=15d"
+      - "--web.enable-lifecycle"
+    ports: ["9090:9090"]
+    networks: [orion-net]
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+
+  # ── TIER 2 — INTELLIGENCE (~+600MB) ──────────────────────
+  # docker compose --profile tier2 up -d
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: orion-postgres
+    restart: unless-stopped
+    profiles: [tier2, tier3]
+    environment:
+      POSTGRES_DB: orion
+      POSTGRES_USER: orion
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-orion2024}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports: ["5434:5432"]
+    networks: [orion-net]
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+
+  regime-engine:
+    image: node:18-alpine
+    container_name: orion-regime
+    restart: unless-stopped
+    profiles: [tier2, tier3]
+    working_dir: /app
+    volumes: ["./services/regime-engine:/app"]
+    command: sh -c "npm install --silent && node src/index.js"
+    environment:
+      - REDIS_URL=redis://orion-redis:6379
+      - PORT=3010
+      - NODE_OPTIONS=--max-old-space-size=150
+    depends_on: [redis]
+    networks: [orion-net]
+    ports: ["3010:3010"]
+    deploy:
+      resources:
+        limits:
+          memory: 180M
+
+  anomaly-engine:
+    image: node:18-alpine
+    container_name: orion-anomaly
+    restart: unless-stopped
+    profiles: [tier2, tier3]
+    working_dir: /app
+    volumes: ["./services/anomaly-engine:/app"]
+    command: sh -c "npm install --silent && node src/index.js"
+    environment:
+      - REDIS_URL=redis://orion-redis:6379
+      - PORT=3015
+      - NODE_OPTIONS=--max-old-space-size=100
+    depends_on: [redis]
+    networks: [orion-net]
+    ports: ["3015:3015"]
+    deploy:
+      resources:
+        limits:
+          memory: 150M
+
+  # ── TIER 3 — FULL DEEP MODE (~+800MB) ────────────────────
+  # docker compose --profile tier3 up -d
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: orion-grafana
+    restart: unless-stopped
+    profiles: [tier3]
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-orion2024}
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_ANALYTICS_REPORTING_ENABLED=false
+    volumes:
+      - grafana_data:/var/lib/grafana
+    ports: ["3001:3000"]
+    depends_on: [prometheus]
+    networks: [orion-net]
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+
+  world-model:
+    image: node:18-alpine
+    container_name: orion-world-model
+    restart: unless-stopped
+    profiles: [tier3]
+    working_dir: /app
+    volumes: ["./services/world-modeling-service:/app"]
+    command: sh -c "npm install --silent && node src/index.js"
+    environment:
+      - REDIS_URL=redis://orion-redis:6379
+      - POSTGRES_URL=postgresql://orion:${POSTGRES_PASSWORD:-orion2024}@orion-postgres:5432/orion
+      - PORT=3020
+      - NODE_OPTIONS=--max-old-space-size=200
+    depends_on: [redis, postgres]
+    networks: [orion-net]
+    ports: ["3020:3020"]
+    deploy:
+      resources:
+        limits:
+          memory: 256M

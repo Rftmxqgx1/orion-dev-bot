@@ -1,0 +1,12 @@
+{
+  "name": "orion-translator",
+  "version": "1.0.0",
+  "description": "Orion multilingual news translator via Gemini",
+  "main": "src/index.js",
+  "scripts": { "start": "node src/index.js" },
+  "dependencies": {
+    "ioredis": "^5.3.2",
+    "prom-client": "^15.1.0"
+  },
+  "engines": { "node": ">=18" }
+}

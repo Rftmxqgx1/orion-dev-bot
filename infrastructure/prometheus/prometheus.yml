@@ -1,0 +1,35 @@
+global:
+  scrape_interval: 30s
+  evaluation_interval: 30s
+  external_labels:
+    system: 'orion'
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'orion-news-scraper'
+    static_configs:
+      - targets: ['news-scraper:3030']
+    metrics_path: /metrics
+
+  - job_name: 'orion-translator'
+    static_configs:
+      - targets: ['translator:3031']
+    metrics_path: /metrics
+
+  - job_name: 'orion-regime-engine'
+    static_configs:
+      - targets: ['regime-engine:3010']
+    metrics_path: /metrics
+
+  - job_name: 'orion-anomaly-engine'
+    static_configs:
+      - targets: ['anomaly-engine:3015']
+    metrics_path: /metrics
+
+  - job_name: 'orion-world-model'
+    static_configs:
+      - targets: ['world-model:3020']
+    metrics_path: /metrics
